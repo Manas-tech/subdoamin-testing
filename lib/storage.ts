@@ -25,7 +25,10 @@ class InMemoryStorage {
   }
 
   async mget<T>(...keys: string[]): Promise<(T | null)[]> {
-    return keys.map(key => this.data.get(key) as T || null);
+    return keys.map(key => {
+      const value = this.data.get(key);
+      return value ? (value as T) : null;
+    });
   }
 }
 
