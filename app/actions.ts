@@ -55,7 +55,13 @@ export async function createSubdomainAction(
     createdAt: Date.now()
   });
 
-  redirect(`${protocol}://${sanitizedSubdomain}.${rootDomain}`);
+  // For development, redirect to the subdomain page directly
+  if (process.env.NODE_ENV === 'development') {
+    redirect(`/s/${sanitizedSubdomain}`);
+  } else {
+    // For production, redirect to the actual subdomain
+    redirect(`${protocol}://${sanitizedSubdomain}.${rootDomain}`);
+  }
 }
 
 export async function deleteSubdomainAction(
