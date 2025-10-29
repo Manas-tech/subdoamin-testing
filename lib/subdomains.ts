@@ -46,7 +46,7 @@ export async function getAllSubdomains() {
     return [];
   }
 
-  const values = await storage.mget<SubdomainData[]>(...keys);
+  const values = await storage.mget<SubdomainData>(...keys);
 
   return keys.map((key, index) => {
     const subdomain = key.replace('subdomain:', '');

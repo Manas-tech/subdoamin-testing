@@ -24,7 +24,7 @@ class InMemoryStorage {
     return Array.from(this.data.keys()).filter(key => regex.test(key));
   }
 
-  async mget<T>(...keys: string[]): Promise<T[]> {
+  async mget<T>(...keys: string[]): Promise<(T | null)[]> {
     return keys.map(key => this.data.get(key) as T || null);
   }
 }
